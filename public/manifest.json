@@ -1,0 +1,23 @@
+{
+  "name": "PersonalDev | Mahmoud Abdelmenam",
+  "short_name": "PersonalDev",
+  "description": "Personal portfolio of Mahmoud Abdelmenam, a full-stack software developer specializing in modern web technologies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/pw/AP1GczOFwxGErCEE1mf9cKfuzms0UWcKRUlUJ-cu0z1vegSMk4L1gp7IFv25iOm0Ebxe5AywSmYG70W3BRK68xQ3PvhQnALJ6vUJr8VXEQJSGb77xMvqgk7-vyfMm5Ewzyr32AryuZiv72Q27FTaiJay_9lw=s192-c",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/pw/AP1GczOFwxGErCEE1mf9cKfuzms0UWcKRUlUJ-cu0z1vegSMk4L1gp7IFv25iOm0Ebxe5AywSmYG70W3BRK68xQ3PvhQnALJ6vUJr8VXEQJSGb77xMvqgk7-vyfMm5Ewzyr32AryuZiv72Q27FTaiJay_9lw=s512-c",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

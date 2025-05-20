@@ -1,0 +1,98 @@
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 65px;
+	height: 34px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	z-index: 99;
+}
+
+.switch input:checked + .slider {
+	background-color: hsl(var(--primary));
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px hsl(var(--ring));
+}
+
+
+.switch input:checked + .slider .moon {
+	opacity: 1;
+	transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.switch input:checked + .slider .sun {
+	opacity: 0;
+}
+
+.switch input:checked + .slider:before {
+	transform: translate(31px, -50%);
+}
+		
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: hsl(var(--muted));
+	transition: .4s;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+  top: 50%;
+	transform: translateY(-50%);
+	background-color: white;
+	border: 3px solid hsl(var(--primary));
+	transition: .4s;
+	box-shadow: 0 0 5px 0 hsl(var(--foreground) / 0.3);
+}
+		
+.slider .moon {
+	position: absolute;
+	top: 50%;
+	left: 17px;
+	height: 15px;
+	width: 15px;
+	transform: translate(-50%, -50%) rotate(45deg);
+	border-radius: 50%;
+	background: transparent;
+	box-shadow: inset -5px 0px 0px 0px hsl(var(--accent-foreground));
+	opacity: 0;
+	transition: opacity 0.4s ease, transform 0.4s ease;
+}
+				
+.slider .sun {
+	position: absolute;
+	top: 50%;
+	right: 17px;
+	height: 14px;
+	width: 14px;
+	transform: translate(50%, -50%);
+	border-radius: 50%;
+	background: yellow;
+	opacity: 1;
+	transition: opacity 0.4s ease;
+	box-shadow: 0 0 10px 5px yellow;
+}
+			
+.slider.round {
+	border-radius: 34px;
+}
+
+.slider.round:before {
+	border-radius: 50%;
+}
