@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,7 +45,7 @@ export default function SocialsPage() {
     <div className="flex flex-col items-center justify-center py-12 md:py-16 animate-fade-in-up">
       <div className="text-center mb-12">
         <Users className="mx-auto h-20 w-20 text-primary mb-6 animate-subtle-pulse" />
-        <h1 className={cn("text-4xl md:text-5xl font-bold tracking-tight text-foreground animate-text-color-change")}>
+        <h1 className={cn("text-4xl md:text-5xl font-bold tracking-tight text-foreground")}>
           Connect With Me
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-xl mt-4 mx-auto animate-fade-in-up" style={{ animationDelay: '0.1s' }}>

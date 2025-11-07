@@ -1,93 +1,24 @@
-
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { CodeXml, Menu, Home as HomeIcon, UserCircle, Rss, Mail, Link as LinkIcon } from 'lucide-react'; // Added LinkIcon
+import { CodeXml, Menu, Home as HomeIcon, UserCircle, Mail, Link as LinkIcon } from 'lucide-react';
 import ThemeToggleSwitch from '@/components/ThemeToggleSwitch';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from '@/components/ui/sheet'; 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
 const nameToType = "Mahmoud Abdelmenam";
 
 export default function Header() {
-  const [displayName, setDisplayName] = useState('');
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const animationFrameRef = useRef<number | null>(null);
-  const charIndexRef = useRef<number>(0);
-  const currentNameRef = useRef<string>('');
-  const lastTimestampRef = useRef<number>(0);
   const pathname = usePathname();
-
-  const TYPING_SPEED_MS_PER_CHAR = 100; 
-
-  const typeCharacter = useCallback((timestamp: number) => {
-    if (!lastTimestampRef.current) {
-      lastTimestampRef.current = timestamp;
-    }
-    const elapsed = timestamp - lastTimestampRef.current;
-
-    if (elapsed >= TYPING_SPEED_MS_PER_CHAR) {
-      lastTimestampRef.current = timestamp - (elapsed % TYPING_SPEED_MS_PER_CHAR);
-      
-      if (charIndexRef.current < nameToType.length) {
-        currentNameRef.current += nameToType[charIndexRef.current];
-        setDisplayName(currentNameRef.current);
-        charIndexRef.current++;
-        setIsTypingComplete(false);
-      } else {
-        setIsTypingComplete(true);
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-          animationFrameRef.current = null;
-        }
-        return;
-      }
-    }
-
-    if (charIndexRef.current <= nameToType.length) {
-      animationFrameRef.current = requestAnimationFrame(typeCharacter);
-    }
-  }, []);
-
-  const clearTypingAnimation = useCallback(() => {
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-      animationFrameRef.current = null;
-    }
-    lastTimestampRef.current = 0;
-    charIndexRef.current = 0;
-    currentNameRef.current = '';
-  }, []);
-
-  const startTypingAnimation = useCallback(() => {
-    clearTypingAnimation();
-    setIsTypingComplete(false);
-    setDisplayName(''); 
-    animationFrameRef.current = requestAnimationFrame(typeCharacter);
-  }, [clearTypingAnimation, typeCharacter]);
-
-  useEffect(() => {
-    startTypingAnimation();
-    return () => {
-      clearTypingAnimation();
-    };
-  }, [startTypingAnimation, clearTypingAnimation]);
-
-  const handleLogoClick = (e: React.MouseEvent) => {
-    if (isTypingComplete || displayName.length === nameToType.length) {
-        startTypingAnimation();
-    }
-  };
 
   const navLinks = [
     { href: "/", label: "Home", icon: HomeIcon },
     { href: "/portfolio", label: "Portfolio", icon: UserCircle },
-    { href: "/blog", label: "Blog", icon: Rss },
-    { href: "/socials", label: "Socials", icon: LinkIcon }, // Added Socials link
+    { href: "/socials", label: "Socials", icon: LinkIcon }, 
     { href: "/contact", label: "Contact", icon: Mail },
   ];
 
@@ -98,16 +29,14 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center space-x-3 group"
-            onClick={handleLogoClick}
-            aria-label="Homepage, click to restart name animation"
+            aria-label="Homepage"
           >
             <CodeXml className="h-9 w-9 text-primary transition-transform group-hover:scale-110 group-hover:rotate-[-5deg] group-active:scale-95" />
             <span className={cn(
               "text-base md:text-lg font-bold min-h-[28px] whitespace-nowrap overflow-hidden",
               "bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary animate-text-gradient-flow group-hover:brightness-125 transition-all duration-300"
             )}>
-              {displayName}
-              {!isTypingComplete && <span className="animate-pulse-caret"></span>}
+              {nameToType}
             </span>
           </Link>
           <div className="flex items-center space-x-3">
@@ -141,10 +70,7 @@ export default function Header() {
                 <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-card p-0 flex flex-col border-l border-border/50 shadow-xl">
                    <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle> 
                   <div className="p-6 border-b border-border/50 flex justify-start items-center">
-                     <Link href="/" className="flex items-center space-x-3 group" onClick={(e) => {
-                        setMobileMenuOpen(false);
-                        handleLogoClick(e);
-                      }}>
+                     <Link href="/" className="flex items-center space-x-3 group" onClick={() => setMobileMenuOpen(false)}>
                         <CodeXml className="h-8 w-8 text-primary" />
                         <span className="text-xl font-bold text-foreground">
                           M. Abdelmenam

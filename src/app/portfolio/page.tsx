@@ -2,17 +2,20 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 import { ExternalLink, Github, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Project {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
-  imageHint: string;
+  image: {
+    src: string; // Use string for image path
+    alt: string;
+    aiHint: string;
+  };
   liveLink?: string;
   repoLink?: string;
   tags: string[];
@@ -21,40 +24,52 @@ interface Project {
 const projects: Project[] = [
   {
     id: "1",
-    title: "EcoTrack: Carbon Footprint Calculator",
-    description: "A web application that helps users calculate and track their carbon footprint. It provides personalized suggestions for reducing environmental impact, leveraging data visualization to motivate sustainable habits.",
-    imageUrl: "https://picsum.photos/seed/ecotrack/600/400",
-    imageHint: "nature technology",
-    liveLink: "#",
-    repoLink: "#",
-    tags: ["React", "Node.js", "API Integration", "Data Visualization", "UX"],
+    title: "Ragheef Omar - Online Restaurant Menu",
+    description: "A sleek, modern, and responsive online menu for the Ragheef Omar restaurant. Built to provide a seamless user experience for customers browsing the menu on any device, with a focus on clear presentation and fast performance.",
+    image: {
+      src: "/images/projects/ragheef-omar.png",
+      alt: "Screenshot of the Ragheef Omar online menu project.",
+      aiHint: "restaurant menu"
+    },
+    liveLink: "https://ragheef-omar-online-menu.vercel.app/",
+    tags: ["Next.js", "React", "Tailwind CSS", "Responsive Design", "UI/UX"],
   },
   {
     id: "2",
-    title: "RecipeFinder AI",
-    description: "A smart recipe suggestion platform using machine learning to recommend recipes based on available ingredients and dietary preferences. Focused on seamless UX and a robust recommendation engine.",
-    imageUrl: "https://picsum.photos/seed/recipeai/600/400",
-    imageHint: "food kitchen",
-    liveLink: "#",
-    repoLink: "#",
-    tags: ["Python", "Flask", "Machine Learning", "AI", "REST API"],
+    title: "Light of Ayat - Quran Application",
+    description: "An elegant and peaceful web application for reading and exploring the Holy Quran. Features a clean, distraction-free interface, making the sacred text accessible and easy to navigate for users everywhere.",
+    image: {
+      src: "/images/projects/light-of-ayat.png",
+      alt: "Screenshot of the Light of Ayat Quran application.",
+      aiHint: "quran app"
+    },
+    liveLink: "https://light-of-ayat.vercel.app/",
+    tags: ["Next.js", "React", "API Integration", "UI/UX", "Spiritual"],
   },
   {
     id: "3",
-    title: "LocalConnect: Community Event Platform",
-    description: "A mobile-first platform connecting local communities by showcasing and promoting nearby events. Built for scalability and performance to encourage real-world interactions.",
-    imageUrl: "https://picsum.photos/seed/localconnect/600/400",
-    imageHint: "community people",
-    tags: ["Next.js", "Firebase", "Geolocation", "Mobile-First", "PWA"],
+    title: "Legacy Portfolio Website",
+    description: "A comprehensive single-page portfolio built with pure HTML, CSS, and JavaScript. This project showcases foundational web development skills, featuring a responsive layout, smooth scrolling, and a detailed gallery of work.",
+    image: {
+      src: "https://picsum.photos/seed/picsum/600/400",
+      alt: "Screenshot of a legacy portfolio website built with HTML and CSS.",
+      aiHint: "portfolio website"
+    },
+    liveLink: "https://mahmoud0066.github.io/Mahmoud/",
+    tags: ["HTML", "CSS", "JavaScript", "Responsive Design", "UI/UX"],
   },
   {
     id: "4",
-    title: "CodeCollaborate: Real-time Editor",
-    description: "A web-based collaborative code editor for simultaneous multi-user coding. Implemented complex real-time synchronization and a developer-friendly interface.",
-    imageUrl: "https://picsum.photos/seed/codecollab/600/400",
-    imageHint: "code editor",
-    liveLink: "#",
-    tags: ["WebSockets", "React", "Monaco Editor", "Real-time Sync", "Node.js"],
+    title: "Translator App",
+    description: "A simple and effective translation tool built with vanilla JavaScript. This app allows users to quickly translate text between different languages, demonstrating core JavaScript skills and API integration.",
+    image: {
+      src: "https://picsum.photos/seed/picsum/600/401",
+      alt: "Screenshot of a simple translator application.",
+      aiHint: "translator app"
+    },
+    liveLink: "https://mahmoud0066.github.io/Translator-App/",
+    repoLink: "https://github.com/Mahmoud0066/Translator-App",
+    tags: ["JavaScript", "HTML", "CSS", "API"],
   },
 ];
 
@@ -71,7 +86,7 @@ export default function PortfolioPage() {
   return (
     <div className="space-y-16 md:space-y-20">
       <header className="text-center space-y-4 animate-fade-in-up">
-        <h1 className={cn("text-4xl md:text-5xl font-bold tracking-tight text-foreground animate-text-color-change")}>
+        <h1 className={cn("text-4xl md:text-5xl font-bold tracking-tight text-foreground")}>
           My Portfolio
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
@@ -80,7 +95,7 @@ export default function PortfolioPage() {
       </header>
 
       <section className="animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-        <h2 className={cn("text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-center mb-10 flex items-center justify-center animate-text-color-change")}>
+        <h2 className={cn("text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-center mb-10 flex items-center justify-center")}>
           <Wrench className="mr-3 h-8 w-8 text-primary animate-subtle-pulse" />
           Skills & Technologies
         </h2>
@@ -99,7 +114,7 @@ export default function PortfolioPage() {
       </section>
 
       <section>
-        <h2 className={cn("text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-center mb-12 animate-fade-in-up animate-text-color-change")} style={{ animationDelay: '0.5s' }}>
+        <h2 className={cn("text-3xl md:text-4xl font-semibold tracking-tight text-foreground text-center mb-12 animate-fade-in-up")} style={{ animationDelay: '0.5s' }}>
           Featured Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
@@ -109,16 +124,17 @@ export default function PortfolioPage() {
               className="flex flex-col overflow-hidden shadow-lg transition-all duration-300 ease-in-out rounded-xl bg-card animate-fade-in-up border-border/70 animate-subtle-lift"
               style={{ animationDelay: `${0.6 + index * 0.1}s` }}
             >
-              <div className="relative w-full h-60 sm:h-72 bg-muted overflow-hidden">
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  layout="fill"
-                  objectFit="cover"
-                  data-ai-hint={project.imageHint}
-                  className="transition-transform duration-500 group-hover:scale-105"
-                  priority={index < 2} 
-                />
+              <div className="relative w-full h-60 sm:h-72 bg-muted overflow-hidden border-b border-border">
+                  <Image
+                      src={project.image.src}
+                      alt={project.image.alt}
+                      width={600}
+                      height={400}
+                      data-ai-hint={project.image.aiHint}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 2}
+                      className="object-cover w-full h-full"
+                    />
               </div>
               <CardHeader className="p-6">
                 <CardTitle className="text-2xl font-semibold text-foreground mb-2">{project.title}</CardTitle>

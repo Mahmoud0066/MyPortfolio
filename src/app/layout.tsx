@@ -1,6 +1,5 @@
 
 import type { Metadata, Viewport } from 'next';
-import { Poppins } from 'next/font/google'; 
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -9,16 +8,9 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import StarryBackground from '@/components/layout/StarryBackground';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
 
-const poppins = Poppins({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'], 
-  variable: '--font-poppins', 
-  display: 'swap',
-});
-
-const APP_NAME = "PersonalDev | Mahmoud Abdelmenam";
+const APP_NAME = "Mahmoud Abdelmenam";
 const APP_DESCRIPTION = "Personal portfolio of Mahmoud Abdelmenam, a full-stack software developer specializing in modern web technologies.";
-const APP_BASE_ICON_URL = "https://lh3.googleusercontent.com/pw/AP1GczOFwxGErCEE1mf9cKfuzms0UWcKRUlUJ-cu0z1vegSMk4L1gp7IFv25iOm0Ebxe5AywSmYG70W3BRK68xQ3PvhQnALJ6vUJr8VXEQJSGb77xMvqgk7-vyfMm5Ewzyr32AryuZiv72Q27FTaiJay_9lw";
+const APP_ICON_PATH = "/images/icons/icon.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -34,13 +26,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json", 
   icons: {
-    icon: [
-      { url: `${APP_BASE_ICON_URL}=s16-c`, sizes: "16x16", type: "image/png" },
-      { url: `${APP_BASE_ICON_URL}=s32-c`, sizes: "32x32", type: "image/png" },
-      { url: `${APP_BASE_ICON_URL}=s48-c`, sizes: "48x48", type: "image/png" },
-    ],
-    apple: `${APP_BASE_ICON_URL}=s180-c`, 
-    shortcut: `${APP_BASE_ICON_URL}=s192-c`,
+    icon: APP_ICON_PATH,
+    apple: APP_ICON_PATH,
+    shortcut: APP_ICON_PATH,
   },
 };
 
@@ -57,11 +45,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} h-full`} suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-      </head>
+    <html lang="en" className={`h-full`} suppressHydrationWarning>
+      <head />
       <body className={`antialiased flex flex-col min-h-screen bg-background text-foreground font-sans transition-colors duration-700 ease-in-out`}>
         <ThemeProvider
           attribute="data-theme" 
@@ -84,3 +69,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+    

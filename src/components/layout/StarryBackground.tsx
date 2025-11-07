@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -14,7 +13,7 @@ interface Star {
 }
 
 interface Planet {
-  id: string;
+  id:string;
   top: string;
   left: string;
   size: string;
@@ -25,40 +24,32 @@ interface Planet {
   opacity: number;
 }
 
-const NUM_STARS = 250; // Increased number of stars
-const NUM_PLANETS = 4;
+const NUM_STARS = 100;
+const NUM_PLANETS = 2; // Reduced from 4
 
 const planetColorSchemes: string[][] = [
-  ['#A0522D', '#8B4513', '#5E2605'], // Sienna, SaddleBrown, DarkerBrown (Earthy/Rocky)
   ['#B0E0E6', '#87CEEB', '#4682B4'], // PowderBlue, SkyBlue, SteelBlue (Icy/Gas Giant)
   ['#FF7F50', '#CD5C5C', '#B22222'], // Coral, IndianRed, Firebrick (Mars-like)
-  ['#F0E68C', '#DAA520', '#B8860B'], // Khaki, Goldenrod, DarkGoldenrod (Golden/Gas Giant)
 ];
 
 const planetAnimations = [
   'planet-drift-1',
   'planet-drift-2',
-  'planet-gentle-arc-1',
-  'planet-drift-3'
 ];
 
 const StarryBackground: React.FC = () => {
   const [stars, setStars] = useState<Star[]>([]);
   const [planets, setPlanets] = useState<Planet[]>([]);
-  const [mouseActive, setMouseActive] = useState(false);
-  const mouseActivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const generateStars = () => {
       const newStars: Star[] = [];
       for (let i = 0; i < NUM_STARS; i++) {
         let baseOpacityValue: number;
-        // ~30% of stars are more consistently visible
         if (i < NUM_STARS * 0.3) { 
-          baseOpacityValue = Math.random() * 0.3 + 0.25; // 0.25 to 0.55
+          baseOpacityValue = Math.random() * 0.3 + 0.25;
         } else { 
-        // ~70% of stars are fainter and appear more on mouse move
-          baseOpacityValue = Math.random() * 0.09 + 0.01; // 0.01 to 0.1
+          baseOpacityValue = Math.random() * 0.09 + 0.01;
         }
         newStars.push({
           id: i,
@@ -91,12 +82,12 @@ const StarryBackground: React.FC = () => {
           id: `planet-${i}`,
           top: `${top}%`,
           left: `${left}%`,
-          size: `${Math.random() * 25 + 30}px`, // Slightly larger planets
+          size: `${Math.random() * 25 + 30}px`,
           gradientColors: planetColorSchemes[i % planetColorSchemes.length],
           animationName: planetAnimations[i % planetAnimations.length],
           animationDuration: `${Math.random() * 60 + 60}s`,
           animationDelay: `${Math.random() * 10}s`,
-          opacity: Math.random() * 0.25 + 0.65, // Opacity between 0.65 and 0.9
+          opacity: Math.random() * 0.25 + 0.65,
         });
       }
       setPlanets(newPlanets);
@@ -105,24 +96,6 @@ const StarryBackground: React.FC = () => {
     generateStars();
     generatePlanets();
 
-    const handleMouseMove = () => {
-      setMouseActive(true);
-      if (mouseActivityTimerRef.current) {
-        clearTimeout(mouseActivityTimerRef.current);
-      }
-      mouseActivityTimerRef.current = setTimeout(() => {
-        setMouseActive(false);
-      }, 250); // Mouse considered inactive after 250ms
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (mouseActivityTimerRef.current) {
-        clearTimeout(mouseActivityTimerRef.current);
-      }
-    };
   }, []);
 
   return (
@@ -131,10 +104,6 @@ const StarryBackground: React.FC = () => {
       aria-hidden="true"
     >
       {stars.map((star) => {
-        // Boost opacity significantly when mouse is active to make faint stars appear
-        const currentOpacity = mouseActive 
-          ? Math.min(1, star.baseOpacity + 0.6) // Increased boost
-          : star.baseOpacity;
         return (
           <div
             key={star.id}
@@ -149,7 +118,7 @@ const StarryBackground: React.FC = () => {
               animationDelay: star.animationDelay,
               animationTimingFunction: 'ease-in-out',
               animationIterationCount: 'infinite',
-              opacity: currentOpacity,
+              opacity: star.baseOpacity,
               transition: 'opacity 0.3s ease-out', 
             }}
           />

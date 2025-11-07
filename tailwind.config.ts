@@ -10,7 +10,7 @@ export default {
   theme: {
   	extend: {
       fontFamily: {
-        sans: ['var(--font-poppins)', 'sans-serif'], 
+        sans: ['Poppins', 'sans-serif'], 
       },
   		colors: {
   			background: 'hsl(var(--background))',
@@ -95,3 +95,5 @@ export default {
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+    

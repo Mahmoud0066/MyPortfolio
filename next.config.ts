@@ -9,6 +9,7 @@ const withPWA = withPWAInit({
   skipWaiting: true,
   cacheOnNavigation: true, // Added to cache pages during client-side navigation
   disable: process.env.NODE_ENV === 'development',
+  
   // You can add more PWA configurations here, like runtime caching strategies
 });
 
@@ -25,22 +26,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
+        hostname: '**',
       },
       {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-        port: '',
-        pathname: '/**',
+        protocol: 'http',
+        hostname: '**',
       },
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      }
     ],
   },
 };
