@@ -7,33 +7,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import StarryBackground from '@/components/layout/StarryBackground';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
-import localFont from 'next/font/local';
+import { Poppins } from 'next/font/google';
 
-const poppins = localFont({
-  src: [
-    {
-      path: '../fonts/Poppins-Light.ttf',
-      weight: '300',
-    },
-    {
-      path: '../fonts/Poppins-Regular.ttf',
-      weight: '400',
-    },
-    {
-      path: '../fonts/Poppins-Medium.ttf',
-      weight: '500',
-    },
-    {
-      path: '../fonts/Poppins-SemiBold.ttf',
-      weight: '600',
-    },
-    {
-      path: '../fonts/Poppins-Bold.ttf',
-      weight: '700',
-    },
-  ],
-  variable: '--font-poppins', 
+const poppins = Poppins({
+  subsets: ['latin'],
   display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
 });
 
 const APP_NAME = "Mahmoud Abdelmenam";
