@@ -7,7 +7,6 @@ const withPWA = withPWAInit({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  cacheOnNavigation: true, // Added to cache pages during client-side navigation
   disable: process.env.NODE_ENV === 'development',
   
   // You can add more PWA configurations here, like runtime caching strategies

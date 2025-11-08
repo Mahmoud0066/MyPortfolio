@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
 }
 
 @layer base {
@@ -254,6 +253,3 @@ body {
   --planet-arc-x: 10vw;
   --planet-arc-y: 0vh;
 }
-    
-
-    
