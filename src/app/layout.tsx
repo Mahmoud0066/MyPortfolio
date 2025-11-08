@@ -7,6 +7,34 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import StarryBackground from '@/components/layout/StarryBackground';
 import ReactQueryProvider from '@/components/ReactQueryProvider';
+import localFont from 'next/font/local';
+
+const poppins = localFont({
+  src: [
+    {
+      path: '../fonts/Poppins-Light.ttf',
+      weight: '300',
+    },
+    {
+      path: '../fonts/Poppins-Regular.ttf',
+      weight: '400',
+    },
+    {
+      path: '../fonts/Poppins-Medium.ttf',
+      weight: '500',
+    },
+    {
+      path: '../fonts/Poppins-SemiBold.ttf',
+      weight: '600',
+    },
+    {
+      path: '../fonts/Poppins-Bold.ttf',
+      weight: '700',
+    },
+  ],
+  variable: '--font-poppins', 
+  display: 'swap',
+});
 
 const APP_NAME = "Mahmoud Abdelmenam";
 const APP_DESCRIPTION = "Personal portfolio of Mahmoud Abdelmenam, a full-stack software developer specializing in modern web technologies.";
@@ -45,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full`} suppressHydrationWarning>
+    <html lang="en" className={`${poppins.variable} h-full`} suppressHydrationWarning>
       <head />
       <body className={`antialiased flex flex-col min-h-screen bg-background text-foreground font-sans transition-colors duration-700 ease-in-out`}>
         <ThemeProvider
@@ -69,5 +97,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-    
